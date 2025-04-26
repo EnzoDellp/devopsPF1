@@ -1,19 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Practifa Formativa Número 1</h1>
-    <ul>
-      <li>Enzo Dellape</li>
-      <li>Federico Gastaldi</li>
-    </ul>
-    <form action="backend.php" method="post">
-      <input type="text" name="nombre" placeholder="Ingresá tu edad" required />
-      <button type="submit">Comprobar</button>
-    </form>
-  </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Práctica Formativa Obligatoria N° 1 - DevOps</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      color: #03dac6;
+    }
+
+    form {
+      background-color: #1e1e1e;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      width: 320px;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #2a2a2a;
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      background-color: #3a3a3a;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 1.5rem;
+      background-color: #03dac6;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background-color: #00bfa5;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Práctica Formativa Obligatoria N° 1 - DevOps</h1>
+
+  <form id="perfilForm">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" name="apellido" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="username">Nombre de usuario:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    document.getElementById('perfilForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const data = {
+        nombre: document.getElementById('nombre').value,
+        apellido: document.getElementById('apellido').value,
+        email: document.getElementById('email').value,
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+      };
+
+      fetch('perfil.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.text())
+      .then(response => {
+        alert('Respuesta del servidor: ' + response);
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  </script>
+
+</body>
 </html>
